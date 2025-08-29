@@ -13,10 +13,10 @@ export default function SignUpIn() {
   const [loginModal,setLoginModal]=useState(false)
           
   return (
-   <div className="min-h-screen flex items-center justify-center p-5">
-   { showSignUpModal && <SignUp  /> }
+   <div className="min-h-screen flex items-center justify-center p-5 " >
+   { showSignUpModal && <SignUp setSignUpModal={setSignUpModal} setLoginModal={setLoginModal}/> }
   {
-    loginModal && <Login   />
+    loginModal && <Login setSignUpModal={setSignUpModal} setLoginModal={setLoginModal} />
   }
 </div>
 

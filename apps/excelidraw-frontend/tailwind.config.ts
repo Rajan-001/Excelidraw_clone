@@ -5,6 +5,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',      // Pages Router
     './components/**/*.{js,ts,jsx,tsx}', // Local components
      '../../packages/ui/*.{js,ts,jsx,tsx}', // Shared packages (like @ui)
+     "/components/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {},

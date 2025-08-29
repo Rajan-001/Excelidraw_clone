@@ -3,9 +3,9 @@ import { initDraw } from "@/draw"
 import { Game } from "@/draw/Game"
 import { useEffect, useRef, useState } from "react"
 import { IconButton } from "./IconButton"
-import { Circle, Pencil, RectangleHorizontalIcon } from "lucide-react"
+import { CaseSensitive, Circle, Diamond, Eraser, MoveUpRight, Pencil, RectangleHorizontalIcon } from "lucide-react"
 
-export type Tool = "circle" | "rect" | "pencil"
+export type Tool = "circle" | "rect" | "pencil" | "arrow" | "eraser" | "diamond" |"text"
 export function Canvas({
   roomId,
   socket,
@@ -73,6 +73,34 @@ function Topbar({
         }}
         activated={selectedTool === "circle"}
         icon={<Circle />}
+      />
+       <IconButton
+        onClick={() => {
+          setSelectedTool("arrow")
+        }}
+        activated={selectedTool === "arrow"}
+        icon={ <MoveUpRight />}
+      />
+        <IconButton
+        onClick={() => {
+          setSelectedTool("eraser")
+        }}
+        activated={selectedTool === "eraser"}
+        icon={  <Eraser /> }
+      />
+       <IconButton
+        onClick={() => {
+          setSelectedTool("diamond")
+        }}
+        activated={selectedTool === "diamond"}
+        icon={   <Diamond /> }
+      />
+        <IconButton
+        onClick={() => {
+          setSelectedTool("text")
+        }}
+        activated={selectedTool === "text"}
+        icon={   <CaseSensitive /> }
       />
     </div>
   )

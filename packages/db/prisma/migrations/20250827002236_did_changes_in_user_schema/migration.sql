@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "provider" TEXT,
+ALTER COLUMN "password" DROP NOT NULL,
+ALTER COLUMN "name" DROP NOT NULL;

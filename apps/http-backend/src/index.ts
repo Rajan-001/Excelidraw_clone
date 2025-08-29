@@ -1,17 +1,43 @@
 import express from "express"
 import jwt from "jsonwebtoken"
-const app = express()
-app.use(express.json())
-const CreateUserSchema = require("@repo/common/types")
-const SignInSchema = require("@repo/common/types")
-const CreateRoomSchema = require("@repo/common/types")
-const prismaClient = require("@repo/db/client")
+import { UserSchema } from "@repo/common/types"
+import { SignInSchema } from "@repo/common/types"
+import {CreateRoomSchema } from "@repo/common/types"
+  import { prismaClient} from "@repo/db/client"
 import { middleware } from "./middleware"
 const { JWT_SECRET } = require("@repo/backend-common/config")
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser"
+import cors from "cors"
+
+const app = express()
+app.use(express.json())
+
+dotenv.config();
+app.use(cookieParser())
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000"
+// app.use(cors({
+//   origin: FRONTEND_URL, // allow frontend URL
+
+//   credentials: true
+// }));
+
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || origin === FRONTEND_URL) {
+      callback(null, true);
+    } else {
+      console.warn("Blocked CORS request from origin:", origin);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
 
 app.post("/signup", async (req, res) => {
-  const parsedData = CreateUserSchema.safeParse(req.body)
-  console.log(parsedData)
+  const parsedData = UserSchema.safeParse(req.body)
+
   if (!parsedData.success) {
     res.json({
       message: "Incorrect Correnditial",
@@ -19,13 +45,26 @@ app.post("/signup", async (req, res) => {
     return
   }
   try {
+  
     const user = await prismaClient.user.create({
       data: {
-        email: parsedData.data?.username,
+        email: parsedData.data.email,
         password: parsedData.data.password,
         name: parsedData.data.name,
       },
     })
+    
+    if(user)
+    {
+      res.status(200).json({
+        message:"user is registered"
+      })
+    }
+    else{
+      res.status(405).json({
+        message:"user is not registerd"
+      })
+    }
   } catch (e) {
     res.status(411).json({
       message: "User already exists with this username",
@@ -41,26 +80,37 @@ app.post("/signin", async (req, res) => {
     })
     return
   }
+  console.log(parsedData)
   try {
-    const user = await prismaClient.user.findFirst({
-      //@ts-ignore
-      email: parsedData.data.username,
-      //@ts-ignore
-      password: parsedData.data.password,
-    })
-    if (!user) {
-      res.status(403).json({
-        message: "Not Authorized",
-      })
-      return
-    }
-    const token = jwt.sign(
-      {
-        userId: user?.id,
-      },
-      JWT_SECRET
-    )
-  } catch (e) {
+      
+    const response = await prismaClient.user.findFirst({
+          where: {
+            email: parsedData.data.email,
+            password: parsedData.data.password,
+          },
+        });
+
+     if(response&&response.id){
+      
+          const token=jwt.sign({userId:response.id},JWT_SECRET!)
+        
+       res.cookie("token", token, {
+            httpOnly: true,   // ✅ cannot be accessed via JS
+            secure: false,    // ✅ set to true only if you have HTTPS (you can change later)
+            sameSite: "lax" // ✅ prevents CSRF
+            });
+            res.status(200).json({
+              message:"User is able to do Sign In"
+            })
+        }
+        else{
+          res.status(407).json({
+            message:"token is not created"
+          })
+        }
+        
+ } 
+  catch (e) {
     res.status(403).json({
       message: "Not able to found database",
     })
@@ -80,9 +130,11 @@ app.post("/room", middleware, async (req, res) => {
   try {
     const room = await prismaClient.room.create({
       data: {
-        slug: parsedData.data.name,
+
+        slug: parsedData.data.slug,
         admin: userId,
-      },
+      }
+
     })
     res.json({
       roomId: room.id,

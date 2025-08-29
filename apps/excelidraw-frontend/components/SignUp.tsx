@@ -1,3 +1,4 @@
+
 "use client"
 
 import { signIn, signOut, useSession } from "next-auth/react"
@@ -5,7 +6,7 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { RiTwitterXFill } from "react-icons/ri";
 import Login from "./Login";
-export default function SignUp() {
+export default function SignUp({setSignUpModal,setLoginModal}:{setSignUpModal:any,setLoginModal:any}) {
      const { data: session, status } =  useSession()
      const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +14,7 @@ export default function SignUp() {
 
   
   async function handleSignup() {
+    console.log(process.env.NEXT_PUBLIC_API_URL!)
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL!}/signup`, {
         method: "POST",
@@ -37,7 +39,7 @@ export default function SignUp() {
   
         
   return (
-   <div className="min-h-screen flex items-center justify-center p-5">
+   <div className="min-h-screen flex items-center justify-center p-5  ">
    
    <div className="relative w-[420px] min-h-[700px] [perspective:1000px]">
     
@@ -145,10 +147,8 @@ export default function SignUp() {
         </div>
       </div>
 
-      {/* BACK SIDE (For flipping animation later) */}
-      <div className="absolute w-full min-h-[700px] backface-hidden bg-white/95 backdrop-blur-xl border border-white/30 rounded-3xl p-8 shadow-2xl flex flex-col rotate-y-180 animate-fadeInUp">
-        {/* Future Login UI here */}
-      </div>
+ 
+      
 
     </div>
   </div> 

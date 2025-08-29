@@ -1,15 +1,15 @@
 import { WebSocket, WebSocketServer } from "ws"
 const { JWT_SECRET } = require("@repo/backend-common/config")
 import jwt from "jsonwebtoken"
-const prismaClient = require("@repo/db/client")
+import {prismaClient} from "@repo/db/client"
 const wss = new WebSocketServer({ port: 8080 })
 interface User {
   ws: WebSocket
   rooms: string[]
-  userId: string
+  userId: number
 }
 const users: User[] = []
-function checkUser(token: string): string | null {
+function checkUser(token: string): number | null {
   try {
     const decoded = jwt.verify(token, JWT_SECRET)
     if (typeof decoded == "string") {
@@ -18,7 +18,7 @@ function checkUser(token: string): string | null {
     if (!decoded || !decoded.userId) {
       return null
     }
-    return decoded.userId
+    return Number(decoded.userId)
   } catch (e) {
     return null
   }
@@ -52,14 +52,14 @@ wss.on("connection", function connection(ws, request) {
       const user = users.find((x) => x.ws === ws)
       user?.rooms.push(parsedData.roomId)
     }
-    if (parsedData.type === "leave_room") {
+    else if (parsedData.type === "leave_room") {
       const user = users.find((x) => x.ws === ws)
       if (!user) {
         return
       }
       user.rooms = user?.rooms.filter((x) => x === parsedData.room)
     }
-    if (parsedData.type === "chat") {
+    else if (parsedData.type === "chat") {
       const roomId = parsedData.roomId
       const message = parsedData.message
       await prismaClient.chat.create({
