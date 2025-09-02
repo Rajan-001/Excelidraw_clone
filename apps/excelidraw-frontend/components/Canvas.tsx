@@ -4,16 +4,20 @@ import { Game } from "@/draw/Game"
 import { useEffect, useRef, useState } from "react"
 import { IconButton } from "./IconButton"
 import { CaseSensitive, Circle, Diamond, Eraser, MoveUpRight, Pencil, RectangleHorizontalIcon } from "lucide-react"
+import { Socket } from "socket.io-client"
+import { useRouter } from "next/navigation"
 
-export type Tool = "circle" | "rect" | "pencil" | "arrow" | "eraser" | "diamond" |"text"
+
+export type Tool = "circle" | "rect" | "pencil" | "arrow" | "eraser" | "diamond" |"text"|""
 export function Canvas({
   roomId,
   socket,
 }: {
-  roomId: string
-  socket: WebSocket
+  roomId: number
+  socket: Socket
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const router=useRouter()
   const [game, setGame] = useState<Game>()
   const [selectedTool, setSelectedTool] = useState<Tool>("circle")
   useEffect(() => {
@@ -28,6 +32,8 @@ export function Canvas({
   }, [canvasRef])
   return (
     <div>
+        <div onClick={() => router.push("/room")} className="text-white fixed cursor-pointer top-4 right-10 border-2 p-2 rounded-full px-4 ">Leave Room</div>
+  
       <canvas
         ref={canvasRef}
         width={window.innerWidth}
@@ -46,13 +52,15 @@ function Topbar({
   setSelectedTool: (s: Tool) => void
 }) {
   return (
-    <div
+    <div className="relative"> 
+     <div
       style={{
         position: "fixed",
         top: 10,
         left: 10,
       }}
     >
+     
       <IconButton
         onClick={() => {
           setSelectedTool("pencil")
@@ -102,6 +110,7 @@ function Topbar({
         activated={selectedTool === "text"}
         icon={   <CaseSensitive /> }
       />
+    </div>
     </div>
   )
 }

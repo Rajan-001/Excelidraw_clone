@@ -3,21 +3,25 @@ import { WS_URL } from "@/config"
 import { initDraw } from "@/draw"
 import { Canvas } from "./Canvas"
 import { useState, useEffect } from "react"
-export function RoomCanvas({ roomId }: { roomId: string }) {
-  const [socket, setSocket] = useState<WebSocket | null>(null)
+import { io, Socket } from "socket.io-client"
+export function RoomCanvas({ roomId }: { roomId: number }) {
+  const [socket, setSocket] = useState<Socket | null>(null)
   useEffect(() => {
-    const ws = new WebSocket(
-      `${WS_URL}?5345`
-    )
-    ws.onopen = () => {
-      setSocket(ws)
-      const data = JSON.stringify({
-        type: "join_room",
-        roomId,
-      })
-      ws.send(data)
-    }
-  }, [])
+   
+    const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL!, {
+      transports: ["websocket"], // force WebSocket (optional)
+    });
+
+    
+ console.log(socket)
+    // Cleanup on unmount
+    return () => {
+      socket.disconnect();
+    };
+ 
+  }, [roomId])
+
+
   if (!socket) {
     return <div>Connecting To server....</div>
   }
@@ -28,4 +32,3 @@ export function RoomCanvas({ roomId }: { roomId: string }) {
   )
 }
 
-// token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3Njg0NDMwYy04YzNiLTRlZmQtOGFmNS00YzQwMzdmNjJkYzMiLCJpYXQiOjE3MzcyOTg2NjV9.xacFop0s231DoUVeLZormeIbBmIRaXftTVVI6weIqFo

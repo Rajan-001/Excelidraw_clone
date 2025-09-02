@@ -2,11 +2,73 @@
 import { Button } from "@repo/ui/button";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
 
 export default function Page(){
  const router=useRouter()
  const [room,SetRoom]=useState("")
+   const [socket, setSocket] = useState<Socket | null>(null)
+   const [error,SetError]=useState(false)
+   const[action,SetAction]=useState("")
+
+    
+      useEffect(() => {
+    const socketInstance = io(process.env.NEXT_PUBLIC_SOCKET_URL!, {
+      transports: ["websocket"],
+    });
+
+    socketInstance.on("connect", () => {
+      console.log("✅ Connected:", socketInstance.id);
+    });
+
+    socketInstance.on("error", (data) => {
+      SetError(true);
+      console.error("❌ Socket error:", data);
+    });
+
+    setSocket(socketInstance);
+
+    // Cleanup when component unmounts
+    return () => {
+      console.log("🧹 Disconnecting socket:", socketInstance.id);
+      socketInstance.disconnect();
+    };
+  }, []);
+
+
+   useEffect(()=>{
+    if (!socket || !room || !action) return;
+   
+      const roomId=Number(room)
+     console.log(room)
+      // Join room
+      socket.emit("send_message", JSON.stringify({ room:roomId,type:action,userId:1 }));
+      
+      socket.on("confirmation",(data)=>{
+        console.log(data,typeof data)
+        if(data==="room_created")
+        {
+          router.push(`/canvas/${room}`)
+        }
+        else if(data==="room_joined"){
+             router.push(`/canvas/${room}`)
+        }
+      })
+      socket.on("error",(data)=>{
+     SetError(true)
+     })  
+   
+
+    // Cleanup on unmount
+    return () => {
+      socket.disconnect();
+    };
+
+
+   },[action, room, router, socket])
+
+
     return(
     <div className="w-screen h-screen relative ">
 
@@ -29,7 +91,7 @@ export default function Page(){
                   variant="outline"
                   size="lg"
                   className="block mx-4  h-12 px-6 rounded-md bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary"
-                 onClick={()=>{router.push(`/canvas/${room}`)}}
+                 onClick={()=>{ SetAction("create_room")}}
                 >
                   Create Room
                   
@@ -38,7 +100,7 @@ export default function Page(){
                   variant="outline"
                   size="lg"
                   className="block h-12 mx-4 px-6 rounded-md bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary"
-                    onClick={()=>{router.push(`/canvas/${room}`)}}
+                    onClick={()=>{SetAction("join_room")}}
                >
                   Join Room
                   

@@ -1,14 +1,40 @@
+"use client"
+import { Canvas } from "@/components/Canvas";
+import React from "react";
 
-import { RoomCanvas } from "@/components/RoomCanvas"
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
 
-export default async function CanvasPage({
+export default  function CanvasPage({
   params,
 }: {
-  params: {
-    roomId: string
-  }
-}) {
-  const roomId = (await params).roomId
+  params: Promise<{ roomId: string }>}) {
+ 
+     const { roomId } = React.use(params);
+  const numericRoomId = Number(roomId);
+  const [socket, setSocket] = useState<Socket | null>(null);
+  
+   useEffect(() => {
+    const socketInstance = io(process.env.NEXT_PUBLIC_SOCKET_URL!, {
+      transports: ["websocket"], // force WebSocket
+    });
 
-  return <RoomCanvas roomId={roomId} />
+
+    setSocket(socketInstance);
+
+    return () => {
+      console.log("🧹 Disconnecting socket:", socketInstance.id);
+      socketInstance.disconnect();
+    };
+  }, [numericRoomId, roomId]);
+
+
+    if (!socket) {
+      return <div>Connecting To server....</div>
+    }
+    return (
+      <div>
+        <Canvas roomId={numericRoomId} socket={socket} />
+      </div>
+    )
 }
