@@ -1,5 +1,5 @@
 "use client"
-import { initDraw } from "@/draw"
+
 import { Game } from "@/draw/Game"
 import { useEffect, useRef, useState } from "react"
 import { IconButton } from "./IconButton"
@@ -8,7 +8,7 @@ import { Socket } from "socket.io-client"
 import { useRouter } from "next/navigation"
 
 
-export type Tool = "circle" | "rect" | "pencil" | "arrow" | "eraser" | "diamond" |"text"|""
+export type Tool = ""|"circle" | "rect" | "pencil" | "arrow" | "eraser" | "diamond" |"text"
 export function Canvas({
   roomId,
   socket,
@@ -21,7 +21,8 @@ export function Canvas({
   const [game, setGame] = useState<Game>()
   const [selectedTool, setSelectedTool] = useState<Tool>("circle")
   useEffect(() => {
-    game?.setTool(selectedTool)
+    //@ts-ignore
+    return game?.setTool(selectedTool)
   }, [selectedTool, game])
 
   useEffect(() => {

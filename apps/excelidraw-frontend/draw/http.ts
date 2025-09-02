@@ -16,7 +16,7 @@ export async function getExistingShapes(roomId: number) {
       return null;
     }
   })
-  .filter((shape) => shape != null); 
+  .filter((shape: any) => shape != null); 
 
   
   return shapes

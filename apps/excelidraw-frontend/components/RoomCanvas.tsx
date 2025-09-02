@@ -1,6 +1,6 @@
 "use client"
 import { WS_URL } from "@/config"
-import { initDraw } from "@/draw"
+
 import { Canvas } from "./Canvas"
 import { useState, useEffect } from "react"
 import { io, Socket } from "socket.io-client"

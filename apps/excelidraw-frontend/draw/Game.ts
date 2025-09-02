@@ -120,9 +120,9 @@ export class Game {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.existingShapes.map((x) => {
-    //@ts-ignore
-      const { shapeId, message } = x;
-      const shape=message
+   //@ts-ignore
+      const { shapeId, Shape } = x;
+      const shape=Shape
    
 
       if (shape.type === "rect") {
@@ -323,6 +323,7 @@ export class Game {
      
           const erasedShapes:any[]=[]
        this.existingShapes.map(x=>{
+        //@ts-ignore
         const {message,shapeId}=x
         const shape=message
         
