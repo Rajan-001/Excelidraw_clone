@@ -36,7 +36,8 @@
     "typescript": "^5",
       "@prisma/client": "6.3.1",
     "node": "^22.19.0",
-    "prisma": "6.3.1"
+    "prisma": "6.3.1",
+    "@auth/prisma-adapter": "^2.10.0"
     
   },
   "devDependencies": {
