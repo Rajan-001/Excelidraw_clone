@@ -6,12 +6,14 @@
     "./client": "./src/index.ts"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "postinstall": "pnpx prisma generate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
+
   "devDependencies": {
     "@repo/typescript-config": "workspace:*"
   },
