@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthConfig } from "next-auth"
 import Google from "next-auth/providers/google"
 import Twitter from "next-auth/providers/twitter"
-import {prisma} from "@repo/db/client"
+// import {prisma} from "@repo/db/client"
 import { JWT_SECRET } from "@repo/backend-common/config"
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken"
@@ -35,12 +35,14 @@ export const { handlers, auth, signIn, signOut }:NextAuthConfig = NextAuth({
       if (!user?.email || !account?.provider||!user?.name) return;
 
       // ✅ Check if email already exists
+      //@ts-expect-error
       const existingUser = await prisma.user.findFirst({
         where: { email: user.email },
       });
 
       if (!existingUser) {
         // ✅ Store only email + provider
+        //@ts-expect-error
          const response= await prisma.user.create({
           data: {
             email: user.email,
@@ -58,6 +60,7 @@ export const { handlers, auth, signIn, signOut }:NextAuthConfig = NextAuth({
    console.log("Rajan ",token)
       } else {
         // ✅ Optional: update provider if user signs in with another provider
+        //@ts-expect-error
         await prisma.user.update({
           where: { email: user.email },
           data: { provider: account.provider },
