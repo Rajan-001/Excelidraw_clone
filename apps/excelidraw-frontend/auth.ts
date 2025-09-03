@@ -6,7 +6,7 @@ import { JWT_SECRET } from "@repo/backend-common/config"
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken"
 
-//@ts-ignore
+//@ts-expect-error
 export const { handlers, auth, signIn, signOut }:NextAuthConfig = NextAuth({
   providers: [
     Google({
