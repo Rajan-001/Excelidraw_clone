@@ -3,7 +3,7 @@ import { Server, Socket } from "socket.io"
 const { JWT_SECRET } = require("@repo/backend-common/config")
 import { createServer } from "http";
 import jwt from "jsonwebtoken"
-import {prismaClient} from "@repo/db/client"
+import {prisma} from "@repo/db/client"
 import express from "express"
 import { Server as SocketIOServer } from "socket.io";
 
@@ -60,7 +60,7 @@ io.on("connection", (socket:Socket)=> {
   const item=JSON.parse(data)
     try{
     if (item.type === "create_room") {
-       await prismaClient.room.create({
+       await prisma.room.create({
          data:{
           slug:item.room,
          adminId:item.userId
@@ -106,7 +106,7 @@ io.on("connection", (socket:Socket)=> {
 
       const roomId = item.roomId
       const message = item.message
-      const shape=await prismaClient.chat.create({
+      const shape=await prisma.chat.create({
         data: {
           message,
           userId:item.userId,
@@ -137,7 +137,7 @@ console.log("Total clients connected:", totalClients);
         shaped.map(async (x:any)=>{
           console.log( x)
           try{
-       const res=  await prismaClient.chat.delete({
+       const res=  await prisma.chat.delete({
         where: { id: x },
       })
       
