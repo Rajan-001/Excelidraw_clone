@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 import { UserSchema } from "@repo/common/types"
 import { SignInSchema } from "@repo/common/types"
 import {CreateRoomSchema } from "@repo/common/types"
-  import { prismaClient} from "@repo/db/client"
+  import { prisma} from "@repo/db/client"
 import { middleware } from "./middleware"
 const { JWT_SECRET } = require("@repo/backend-common/config")
 import dotenv from "dotenv";
@@ -46,7 +46,7 @@ app.post("/signup", async (req, res) => {
   }
   try {
   
-    const user = await prismaClient.user.create({
+    const user = await prisma.user.create({
       data: {
         email: parsedData.data.email,
         password: parsedData.data.password,
@@ -83,7 +83,7 @@ app.post("/signin", async (req, res) => {
   console.log(parsedData)
   try {
       
-    const response = await prismaClient.user.findFirst({
+    const response = await prisma.user.findFirst({
           where: {
             email: parsedData.data.email,
             password: parsedData.data.password,
@@ -128,7 +128,7 @@ app.post("/room", middleware, async (req, res) => {
   //@ts-ignore
   const userId = req.userId
   try {
-    const room = await prismaClient.room.create({
+    const room = await prisma.room.create({
       data: {
         slug: parsedData.data.slug,
         admin: userId,
@@ -148,7 +148,7 @@ app.post("/room", middleware, async (req, res) => {
 app.get("/chats/:roomId", async (req, res) => {
   try {
     const roomId = Number(req.params.roomId)
-    const messages = await prismaClient.chat.findMany({
+    const messages = await prisma.chat.findMany({
       where: {
         roomName: roomId,
       },
@@ -170,7 +170,7 @@ app.get("/chats/:roomId", async (req, res) => {
 
 app.get("/room/:slug", async (req, res) => {
   const slug = Number(req.params.slug)
-  const room = await prismaClient.room.findFirst({
+  const room = await prisma.room.findFirst({
     where: {
       slug,
     },
