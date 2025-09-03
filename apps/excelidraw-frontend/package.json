@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpx prisma generate && next build --no-lint",
+    "build": "next build --no-lint",
     "start": "next start",
-    "lint": "next lint",
-  "postinstall": "pnpx prisma generate"
+    "lint": "next lint"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
