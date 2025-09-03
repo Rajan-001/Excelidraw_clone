@@ -95,6 +95,18 @@ importers:
 
   apps/http-backend:
     dependencies:
+      '@repo/backend-common':
+        specifier: workspace:*
+        version: link:../../packages/backend-common
+      '@repo/common':
+        specifier: workspace:*
+        version: link:../../packages/common
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@types/cookie-parser':
         specifier: ^1.4.9
         version: 1.4.9(@types/express@5.0.0)
@@ -122,31 +134,24 @@ importers:
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
+      typescript:
+        specifier: latest
+        version: 5.9.2
       zod:
         specifier: ^3.24.1
         version: 3.24.1
-    devDependencies:
+
+  apps/ws-backend:
+    dependencies:
       '@repo/backend-common':
         specifier: workspace:*
         version: link:../../packages/backend-common
-      '@repo/common':
-        specifier: workspace:*
-        version: link:../../packages/common
       '@repo/db':
         specifier: workspace:*
         version: link:../../packages/db
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      typescript:
-        specifier: latest
-        version: 5.9.2
-
-  apps/ws-backend:
-    dependencies:
-      '@repo/db':
-        specifier: workspace:*
-        version: link:../../packages/db
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.0
@@ -168,13 +173,6 @@ importers:
       ws:
         specifier: ^8.18.0
         version: 8.18.0
-    devDependencies:
-      '@repo/backend-common':
-        specifier: workspace:*
-        version: link:../../packages/backend-common
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
 
   packages/backend-common:
     dependencies:
@@ -200,6 +198,9 @@ importers:
       '@prisma/client':
         specifier: 6.3.1
         version: 6.3.1(prisma@6.3.1(typescript@5.9.2))(typescript@5.9.2)
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
       '@types/node':
         specifier: ^24.3.0
         version: 24.3.0
@@ -209,10 +210,6 @@ importers:
       prisma:
         specifier: 6.3.1
         version: 6.3.1(typescript@5.9.2)
-    devDependencies:
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
 
   packages/eslint-config:
     devDependencies:
