@@ -1,5 +1,6 @@
 "use client"
-import { Tool } from "@/components/Canvas"
+
+import { Tool } from "../components/Canvas";
 import { getExistingShapes } from "./http"
 import { io, Socket } from "socket.io-client";
 

@@ -12,6 +12,7 @@
   "dependencies": {
     "@repo/ui": "workspace:*",
     "@types/jsonwebtoken": "^9.0.8",
+    "@repo/typescript-config":"workspace:*",
     "axios": "^1.7.9",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.475.0",

@@ -1,6 +1,7 @@
 
-import SignUpIn from "@/components/SignUpIn"
+
 import { SessionProvider } from "next-auth/react"
+import SignUpIn from "../../components/SignUpIn"
 
 
 export default function page() {

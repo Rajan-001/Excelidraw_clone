@@ -1,11 +1,12 @@
 "use client"
 
-import { Game } from "@/draw/Game"
+
 import { useEffect, useRef, useState } from "react"
 import { IconButton } from "./IconButton"
 import { CaseSensitive, Circle, Diamond, Eraser, MoveUpRight, Pencil, RectangleHorizontalIcon } from "lucide-react"
 import { Socket } from "socket.io-client"
 import { useRouter } from "next/navigation"
+import { Game } from "../draw/Game"
 
 
 export type Tool = ""|"circle" | "rect" | "pencil" | "arrow" | "eraser" | "diamond" |"text"

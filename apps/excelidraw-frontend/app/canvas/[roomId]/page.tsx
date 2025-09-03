@@ -1,9 +1,10 @@
 "use client"
-import { Canvas } from "@/components/Canvas";
+
 import React from "react";
 
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+import { Canvas } from "../../../components/Canvas";
 
 export default  function CanvasPage({
   params,
