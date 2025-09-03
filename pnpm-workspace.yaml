@@ -10,3 +10,4 @@ onlyBuiltDependencies:
   - node
   - prisma
   - sharp
+  - unrs-resolver
