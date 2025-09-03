@@ -182,13 +182,12 @@ importers:
 
   packages/backend-common:
     dependencies:
-      '@types/node':
-        specifier: ^22.13.0
-        version: 22.18.0
-    devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@types/node':
+        specifier: ^22.13.0
+        version: 22.18.0
 
   packages/common:
     dependencies:
