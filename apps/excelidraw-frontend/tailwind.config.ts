@@ -1,14 +1,18 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',        // App Router (Next.js)
-    './pages/**/*.{js,ts,jsx,tsx}',      // Pages Router
-    './components/**/*.{js,ts,jsx,tsx}', // Local components
-     '../../packages/ui/*.{js,ts,jsx,tsx}', // Shared packages (like @ui)
-     "/components/**/*.{js,ts,jsx,tsx}"
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './app/**/*.{js,ts,jsx,tsx}',
+     './public/**/*.{js,ts,jsx,tsx}',
+     './screen/**/*.{js,ts,jsx,tsx}'
+
   ],
   theme: {
     extend: {},
   },
   plugins: [],
 }
+
+export default config
