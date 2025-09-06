@@ -47,7 +47,7 @@ export default function SignUp({setSignUpModal,setLoginModal}:{setSignUpModal:an
     <div id="form-container" className="relative w-full min-h-[700px] [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]">
 
       {/* FRONT SIDE */}
-      <div className="absolute w-full min-h-[700px] backface-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 backdrop-blur-xl border border-white/30 rounded-3xl p-10 shadow-2xl flex flex-col animate-fadeInUp">
+      <div className="absolute w-full min-h-[700px] backface-hidden bg-gradient-to-br from-neutral-100 via-neutral-900 to-neutral-100 backdrop-blur-xl border border-white/30 rounded-3xl p-10 shadow-xl flex flex-col animate-fadeInUp">
         
         {/* Title */}
         <div className="text-center mb-8">
@@ -98,14 +98,14 @@ export default function SignUp({setSignUpModal,setLoginModal}:{setSignUpModal:an
         {/* Sign Up Button */}
         <button  
           onClick={() => handleSignup()} 
-          className="relative w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+          className="relative w-full bg-gradient-to-r from-neutral-800 via-neutral-900 to-neutral-800
                     text-white p-4 rounded-xl font-semibold 
                     shadow-md hover:shadow-2xl 
                     transition-all duration-300 ease-in-out 
                     transform hover:-translate-y-1 active:translate-y-0 overflow-hidden group"
         >
           {/* Glow Ring Effect */}
-          <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 opacity-50 blur-lg group-hover:opacity-70 transition-opacity duration-300"></span>
+          <span className="absolute inset-0 rounded-xl bg-gradient-to-l from-neutral-800 via-neutral-900 to-neutral-800 opacity-50 blur-lg group-hover:opacity-70 transition-opacity duration-300"></span>
           
           {/* Shimmer Effect */}
           <span className="absolute top-0 left-[-150%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent 
@@ -118,7 +118,7 @@ export default function SignUp({setSignUpModal,setLoginModal}:{setSignUpModal:an
 
         {/* Divider */}
         <div className="relative text-center my-8">
-          <span className="bg-indigo-600 px-4 py-1 rounded-full text-slate-100 text-xs font-medium relative z-10 shadow-md">Or sign up with</span>
+          <span className="bg-neutral-900 px-4 py-1 rounded-full text-slate-100 text-xs font-medium relative z-10 shadow-md">Or sign up with</span>
           <div className="absolute top-1/2 left-0 right-0 h-px bg-slate-300 opacity-50 -z-10"></div>
         </div>
 
@@ -142,7 +142,7 @@ export default function SignUp({setSignUpModal,setLoginModal}:{setSignUpModal:an
         <div className="text-center mt-4">
           <p className="text-slate-100 text-sm">
             Already have an account?  
-            <span onClick={()=>{setSignUpModal(false);setLoginModal(true)}} className="text-yellow-200 font-semibold cursor-pointer hover:text-white ml-2">Login</span>
+            <span onClick={()=>{setSignUpModal(false);setLoginModal(true)}} className="text-slate-900 font-semibold cursor-pointer hover:text-white ml-2">Login</span>
           </p>
         </div>
       </div>

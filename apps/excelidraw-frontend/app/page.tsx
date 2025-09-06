@@ -6,9 +6,23 @@ import Link from "next/link"
 
 function App() {
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="lines z-5">
+		<div className="line"></div> 
+    <div className="line"></div> 
+    <div className="line"></div>
+    <div className="line"></div> 
+    <div className="line"></div> 
+    <div className="line"></div> 
+    <div className="line"></div> 
+    <div className="line"></div>
+    <div className="line"></div> 
+    <div className="line"></div> 
+
+
+    </div>
       {/* Hero Section */}
-      <header className="relative overflow-hidden">
+      <header className="relative overflow-hidden z-10">
         <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl text-foreground">
@@ -19,18 +33,20 @@ function App() {
               Create, collaborate, and share beautiful diagrams and sketches
               with our intuitive drawing tool. No sign-up required.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex items-center justify-center gap-x-6 ">
+             
+              <Link href="/profile ">
+                <Button variant={"primary"} size="lg" className="h-12 px-6 z-30 border-2 cursor-pointer border-black bg-black text-white rounded-xl font-bold text-base">
+                  Create A New Account
+                </Button>
+              </Link>
+
               <Link href={"/profile"}>
-                <Button variant={"primary"} size="lg" className="h-12 px-6">
+                <Button variant={"primary"} size="lg" className="h-12 px-6 z-30 border-2 cursor-pointer border-black rounded-xl font-bold text-base">
                   Sign in
-                  <Pencil className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/profile">
-                <Button variant="outline" size="lg" className="h-12 px-6">
-                  Sign up
-                </Button>
-              </Link>
+             
             </div>
           </div>
         </div>
@@ -38,44 +54,46 @@ function App() {
 
       {/* Features Section */}
       <section className="py-24 bg-muted/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
-            <Card className="p-6 border-2 hover:border-primary transition-colors" title={""} href={""}>
+        
+            <Card className="p-8 border-2 rounded-3xl py-14 transition-colors z-20 group hover:bg-neutral-900 bg-neutral-200 text-neutral-900  hover:text-neutral-100" title={""} href={""}>
               <div className="flex items-center gap-4">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <Share2 className="h-6 w-6 text-primary" />
+                <div className="p-2 rounded-lg ">
+                <Share2 className="h-6 w-6  rounded-full animate-bounce card-animation "/>
+
                 </div>
-                <h3 className="text-xl font-semibold">
+                <h3 className="text-xl font-semibold  ">
                   Real-time Collaboration
                 </h3>
               </div>
-              <p className="mt-4 text-muted-foreground">
+              <p className="mt-4 text-md ">
                 Work together with your team in real-time. Share your drawings
                 instantly with a simple link.
               </p>
             </Card>
 
-            <Card className="p-6 border-2 hover:border-primary transition-colors" title={""} href={""}>
+            <Card className="p-8 border-2 py-14 hover:border-primary z-20 rounded-3xl  transition-colors group hover:bg-neutral-900 bg-neutral-200 text-neutral-900  hover:text-neutral-100" title={""} href={""}>
               <div className="flex items-center gap-4">
                 <div className="p-2 rounded-lg bg-primary/10">
-                  <Users2 className="h-6 w-6 text-primary" />
+                  <Users2 className="h-6 w-6 text-primary animate-bounce card-animation" />
                 </div>
                 <h3 className="text-xl font-semibold">Multiplayer Editing</h3>
               </div>
-              <p className="mt-4 text-muted-foreground">
+              <p className="mt-4 text-base">
                 Multiple users can edit the same canvas simultaneously. See
                 who&apos;s drawing what in real-time.
               </p>
             </Card>
 
-            <Card className="p-6 border-2 hover:border-primary transition-colors" title={""}  href={""}>
+            <Card className="p-8 border-2 py-14 hover:border-primary z-20 transition-colors rounded-3xl group hover:bg-neutral-900 bg-neutral-200 text-neutral-900  hover:text-neutral-100 " title={""}  href={""}>
               <div className="flex items-center gap-4">
                 <div className="p-2 rounded-lg bg-primary/10">
-                  <Sparkles className="h-6 w-6 text-primary" />
+                  <Sparkles className="h-6 w-6 text-primary animate-bounce card-animation " />
                 </div>
                 <h3 className="text-xl font-semibold">Smart Drawing</h3>
               </div>
-              <p className="mt-4 text-muted-foreground">
+              <p className="mt-4 text-base">
                 Intelligent shape recognition and drawing assistance helps you
                 create perfect diagrams.
               </p>
@@ -91,7 +109,7 @@ function App() {
         <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <p className="text-sm text-muted-foreground">
-              © 2024 Excalidraw Clone. All rights reserved.
+              © 2024 Ikoot. All rights reserved.
             </p>
             <div className="flex space-x-6">
               <a

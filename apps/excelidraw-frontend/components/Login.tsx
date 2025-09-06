@@ -40,7 +40,7 @@ export default function Login({setSignUpModal,setLoginModal}:{setSignUpModal:any
 
   return (
     <div className="min-h-screen flex items-center justify-center p-5 bg-white/30 backdrop-blur-sm">
-      <div className="relative w-[420px] min-h-[480px] bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-400 rounded-3xl shadow-2xl p-8 text-white">
+      <div className="relative w-[420px] min-h-[480px] bg-gradient-to-bl from-neutral-100 via-neutral-900 to-neutral-100 rounded-3xl shadow-xl p-8 text-white">
         
         {/* Header */}
         <div className="text-center mb-6">
@@ -82,13 +82,13 @@ export default function Login({setSignUpModal,setLoginModal}:{setSignUpModal:any
         {/* Login Button */}
         <button  
           onClick={handleLogin} 
-          className="relative w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+          className="relative w-full bg-gradient-to-r from-neutral-800 via-neutral-900 to-neutral-800
                      text-white p-4 rounded-xl font-semibold shadow-md hover:shadow-2xl 
                      transition-all duration-300 ease-in-out transform hover:-translate-y-1 
                      active:translate-y-0 overflow-hidden group"
         >
           {/* Glow Ring Effect */}
-          <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 opacity-50 blur-lg group-hover:opacity-70 transition-opacity duration-300"></span>
+          <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-neutral-800 via-neutral-900 to-neutral-800 opacity-50 blur-lg group-hover:opacity-70 transition-opacity duration-300"></span>
           
           {/* Shimmer Effect */}
           <span className="absolute top-0 left-[-150%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent 
@@ -100,7 +100,7 @@ export default function Login({setSignUpModal,setLoginModal}:{setSignUpModal:any
 
         {/* Divider */}
         <div className="relative text-center my-8 text-slate-200 text-sm">
-          <span className="bg-slate-600 px-4 py-2 relative z-10 rounded-lg">Or login with</span>
+          <span className="bg-neutral-900 px-4 py-2 relative z-10 rounded-lg">Or login with</span>
           <div className="absolute top-1/2 left-0 right-0 h-px bg-slate-200 -z-10"></div>
         </div>
 
@@ -118,7 +118,7 @@ export default function Login({setSignUpModal,setLoginModal}:{setSignUpModal:any
         <div className="text-center mt-6">
           <p className="text-slate-100 text-sm">
             Don’t have an account?
-            <span onClick={()=>{setSignUpModal(true);setLoginModal(false);}} className="text-indigo-100 font-semibold cursor-pointer hover:text-violet-500 ml-2">Sign Up</span>
+            <span onClick={()=>{setSignUpModal(true);setLoginModal(false);}} className="text-slate-100 font-semibold cursor-pointer hover:text-neutral-200 ml-2">Sign Up</span>
           </p>
         </div>
       </div>
