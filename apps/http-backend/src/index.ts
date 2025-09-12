@@ -71,7 +71,7 @@ app.post("/signup", async (req, res) => {
 app.post("/signin", async (req, res) => {
   const parsedData = SignInSchema.safeParse(req.body)
   if (!parsedData.success) {
-    res.json({
+    res.status(509).json({
       message: "Incorrect Inputs",
     })
     return
@@ -81,7 +81,7 @@ app.post("/signin", async (req, res) => {
       
     const response = await prisma.user.findFirst({
           where: {
-            email: parsedData.data.email,
+            name: req.body.name,
             password: parsedData.data.password,
           },
         });
