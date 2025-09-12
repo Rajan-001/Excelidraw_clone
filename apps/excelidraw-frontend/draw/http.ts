@@ -1,9 +1,8 @@
 
 import axios from "axios"
-import { HTTP_BACKEND } from "../config";
 
 export async function getExistingShapes(roomId: number) {
-  const res = await axios.get(`${HTTP_BACKEND}/chats/${roomId}`)
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/chats/${roomId}`)
   const messages = res.data.messages
 
  const shapes = messages.map((x: { id:number,message: string }) => {
