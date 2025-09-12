@@ -181,6 +181,11 @@ app.get("/room/:slug", async (req, res) => {
   })
 })
 
+app.post("/",async(req,res)=>{
+res.status(200).json({
+  message:"it is worknig"
+})  
+})
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
