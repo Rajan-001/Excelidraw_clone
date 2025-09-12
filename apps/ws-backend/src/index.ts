@@ -38,31 +38,16 @@ function checkUser(token: string): number | null {
   }
 }
 
-// io.use((socket, next) => {
-//   const token = socket.handshake.query.token as string;
-//   const userId = checkUser(token);
-//   if (!userId) {
-//     return next(new Error("Authentication error"));
-//   }
-//   (socket as any).userId = userId; // attach userId to socket
-//     users.push({
-//     userId,
-//     rooms: [],
-//     ws:socket,
-//   })
-//   next();
-// });
-
 io.on("connection", (socket:Socket)=> {
    console.log("connected with socket",socket.id)
 
   socket.on("send_message",  async (data)=> {
-    console.log(typeof data)
+  
   const item=JSON.parse(data)
     try{
     if (item.type === "create_room") {
       
-      console.log("DATABASE_URL:", prisma.$connect);
+     
 
        await prisma.room.create({
          data:{
@@ -77,11 +62,11 @@ io.on("connection", (socket:Socket)=> {
          })   
            const user = users.find((x) => x.ws === socket)
       user?.rooms.push(Number(item.room))
-         console.log("userd is ",users)
+        
          socket.emit("confirmation","room_created")
       }
     }catch(err){
-      console.log("error",err)
+    
       socket.emit("error",{
         message:err
       })
@@ -90,7 +75,7 @@ io.on("connection", (socket:Socket)=> {
     if (item.type === "join_room") {
       const user = users.find((x) => x.ws === socket)
       user?.rooms.push(item.room)
-      console.log("joined users",users )
+     
        socket.emit("confirmation","room_joined")
     }
     else if (item.type === "leave_room") {
@@ -117,7 +102,7 @@ io.on("connection", (socket:Socket)=> {
           roomName:roomId
         },
       })
-      console.log("chat is",item.message)
+     
       
        io.emit("chat", {
     userId: item.userId,
@@ -127,7 +112,7 @@ io.on("connection", (socket:Socket)=> {
       });
     
      const totalClients = io.engine.clientsCount;
-console.log("Total clients connected:", totalClients);
+
     }
   })
     socket.on("erase",async (data)=>{
@@ -136,10 +121,10 @@ console.log("Total clients connected:", totalClients);
        
         try{
            if(shaped)
-            console.log("hello is am ",shaped)
+           
            {
         shaped.map(async (x:any)=>{
-          console.log( x)
+          
           try{
        const res=  await prisma.chat.delete({
         where: { id: x },

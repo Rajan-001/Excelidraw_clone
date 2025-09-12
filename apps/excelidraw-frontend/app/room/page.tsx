@@ -46,7 +46,7 @@ export default function Page(){
       socket.emit("send_message", JSON.stringify({ room:roomId,type:action,userId:1 }));
       
       socket.on("confirmation",(data)=>{
-        console.log(data,typeof data)
+        
         if(data==="room_created")
         {
           router.push(`/canvas/${room}`)

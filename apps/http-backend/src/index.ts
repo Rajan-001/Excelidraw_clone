@@ -49,7 +49,7 @@ app.post("/signup", async (req, res) => {
         name: parsedData.data.name,
       },
     })
-    console.log(user)
+
     if(user)
     {
       res.status(200).json({
@@ -70,13 +70,14 @@ app.post("/signup", async (req, res) => {
 
 app.post("/signin", async (req, res) => {
   const parsedData = SignInSchema.safeParse(req.body)
+  
   if (!parsedData.success) {
     res.status(509).json({
       message: "Incorrect Inputs",
     })
     return
   }
-  console.log(parsedData)
+ 
   try {
       
     const response = await prisma.user.findFirst({
@@ -153,7 +154,7 @@ app.get("/chats/:roomId", async (req, res) => {
       },
       take: 50,
     })
-    console.log(messages)
+    
     res.json({
       messages,
     })
