@@ -1,4 +1,5 @@
 import express from "express"
+import { Hono } from "hono";
 import jwt from "jsonwebtoken"
 import { UserSchema } from "@repo/common/types"
 import { SignInSchema } from "@repo/common/types"
@@ -16,11 +17,6 @@ app.use(express.json())
 dotenv.config();
 app.use(cookieParser())
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000"
-// app.use(cors({
-//   origin: FRONTEND_URL, // allow frontend URL
-
-//   credentials: true
-// }));
 
 
 app.use(cors({
