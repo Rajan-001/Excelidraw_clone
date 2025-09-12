@@ -34,7 +34,6 @@ app.use(cors({
 
 app.post("/signup", async (req, res) => {
   const parsedData = UserSchema.safeParse(req.body)
-
   if (!parsedData.success) {
     res.json({
       message: "Incorrect Correnditial",
@@ -50,7 +49,7 @@ app.post("/signup", async (req, res) => {
         name: parsedData.data.name,
       },
     })
-    
+    console.log(user)
     if(user)
     {
       res.status(200).json({
@@ -64,7 +63,7 @@ app.post("/signup", async (req, res) => {
     }
   } catch (e) {
     res.status(411).json({
-      message: "User already exists with this username",
+      message: e,
     })
   }
 })

@@ -8,6 +8,7 @@ import express from "express"
 import { Server as SocketIOServer } from "socket.io";
 
 const app=express()
+
 const httpServer = createServer(app);
 
 const PORT = Number(process.env.PORT) || 3030;
@@ -60,6 +61,9 @@ io.on("connection", (socket:Socket)=> {
   const item=JSON.parse(data)
     try{
     if (item.type === "create_room") {
+      
+      console.log("DATABASE_URL:", prisma.$connect);
+
        await prisma.room.create({
          data:{
           slug:item.room,

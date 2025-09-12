@@ -19,7 +19,7 @@ export default function SignUp({setSignUpModal,setLoginModal}:{setSignUpModal:an
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL!}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password,name }),
+        body: JSON.stringify({ email,password,name }),
       });
 
       const data = await res.json();
@@ -27,6 +27,7 @@ export default function SignUp({setSignUpModal,setLoginModal}:{setSignUpModal:an
         alert(data.error || "Signup failed");
         return;
       }
+      console.log(data)
      setLoginModal(true)
      setSignUpModal(false)
      

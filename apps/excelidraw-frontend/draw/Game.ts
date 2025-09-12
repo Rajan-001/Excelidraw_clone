@@ -100,7 +100,9 @@ export class Game {
    async init() {
     
     this.existingShapes = await getExistingShapes(this.roomId)
+    console.log("clean canvas shapes",this.existingShapes)
     this.clearCanvas()
+    console.log("existing shapes",this.existingShapes)
   }
   initHandlers() {
 
@@ -122,10 +124,11 @@ export class Game {
 
     this.existingShapes.map((x) => {
    //@ts-ignore
-      const { shapeId, Shape } = x;
-      const shape=Shape
-   
+      const { shapeId, message } = x;
 
+      const shape=message
+   
+    console.log("Shape is ",x)
       if (shape.type === "rect") {
         this.ctx.strokeStyle = "rgba(255,255,255)"
         this.ctx.strokeRect(shape.x, shape.y, shape.width, shape.height)
