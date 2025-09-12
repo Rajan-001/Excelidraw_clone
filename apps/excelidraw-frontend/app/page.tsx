@@ -31,7 +31,7 @@ function App() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
               Create, collaborate, and share beautiful diagrams and sketches
-              with our intuitive drawing tool. No sign-up required.
+              with our intuitive drawing tool. Sign-up required.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6 ">
              

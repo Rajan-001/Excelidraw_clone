@@ -18,17 +18,16 @@ export default function Login({setSignUpModal,setLoginModal}:{setSignUpModal:any
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password}),
+        body: JSON.stringify({ name, password}),
       });
-
-      const data = await res.json();
-      console.log(data)
+      
       if (!res.ok) {
+        const data = await res.json();
         alert(data.error || "SignIN failed");
         return;
        }
        else{
-        router.push("/canvas")
+        router.push("/room")
        }
  
     
@@ -50,10 +49,10 @@ export default function Login({setSignUpModal,setLoginModal}:{setSignUpModal:any
 
         {/* Email Input */}
         <div className="mb-4">
-          <label className="block text-slate-200 text-sm font-semibold mb-2">Email</label>
+          <label className="block text-slate-200 text-sm font-semibold mb-2">Name</label>
           <input 
-            onChange={(e) => setEmail(e.target.value)} 
-            type="email" 
+            onChange={(e) => SetName(e.target.value)} 
+            type="text" 
             placeholder="Enter your username" 
             className="w-full p-3 border-2 border-slate-200 text-slate-900 rounded-xl text-base 
                        bg-white/80 focus:border-indigo-500 focus:bg-white transform 

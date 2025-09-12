@@ -35,6 +35,7 @@ app.use(cors({
   credentials: true
 }));
 
+
 app.post("/signup", async (req, res) => {
   const parsedData = UserSchema.safeParse(req.body)
 
