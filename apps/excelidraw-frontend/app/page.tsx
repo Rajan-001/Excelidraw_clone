@@ -113,7 +113,7 @@ function App() {
             </p>
             <div className="flex space-x-6">
               <a
-                href="https://github.com"
+                href="https://github.com/Rajan-001/Excelidraw_clone"
                 className="text-muted-foreground hover:text-primary"
               >
                 <Github className="h-5 w-5" />
